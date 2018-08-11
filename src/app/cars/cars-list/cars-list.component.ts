@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { Car } from '../models/car'
+import { preserveWhitespacesDefault } from '@angular/compiler'
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'cars-list',
   templateUrl: './cars-list.component.html',
   styleUrls: ['./cars-list.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CarsListComponent implements OnInit {
+  totalCost: number
   cars: Car[] = [
     {
       id: 1,
@@ -20,7 +23,7 @@ export class CarsListComponent implements OnInit {
         surname: 'Kowalski',
       },
       cost: 300,
-      isFullyDamaged: true,
+      isFullyDamaged: false,
     },
     {
       id: 2,
@@ -52,5 +55,11 @@ export class CarsListComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.countTotalCost()
+  }
+
+  countTotalCost(): void {
+    this.totalCost = this.cars.map(car => car.cost).reduce((prev, next) => prev + next)
+  }
 }
