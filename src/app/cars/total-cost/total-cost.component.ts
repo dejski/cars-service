@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'cs-total-cost',
@@ -8,5 +8,13 @@ import { Component, OnInit, Input } from '@angular/core'
 export class TotalCostComponent {
   @Input()
   totalCost: number
-  constructor() {}
+  @Output()
+  shownGross: EventEmitter<number> = new EventEmitter<number>()
+
+  // tslint:disable-next-line:no-inferrable-types
+  private VAT: number = 1.23
+
+  showGross(): void {
+    this.shownGross.emit(this.totalCost * this.VAT)
+  }
 }

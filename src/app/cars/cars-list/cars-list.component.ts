@@ -11,6 +11,7 @@ import { preserveWhitespacesDefault } from '@angular/compiler'
 })
 export class CarsListComponent implements OnInit {
   totalCost: number
+  grossCost: number
   cars: Car[] = [
     {
       id: 1,
@@ -61,5 +62,9 @@ export class CarsListComponent implements OnInit {
 
   countTotalCost(): void {
     this.totalCost = this.cars.map(car => car.cost).reduce((prev, next) => prev + next)
+  }
+
+  onShownGross(grossCost: number): void {
+    this.grossCost = grossCost
   }
 }
