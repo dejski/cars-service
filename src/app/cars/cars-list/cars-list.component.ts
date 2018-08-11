@@ -1,5 +1,5 @@
-import { CarsService } from './../cars.service'
-import { TotalCostComponent } from './../total-cost/total-cost.component'
+import { CarsService } from '../cars.service'
+import { TotalCostComponent } from '../total-cost/total-cost.component'
 import {
   Component,
   OnInit,
@@ -11,7 +11,7 @@ import { Car } from '../models/car'
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'cars-list',
+  selector: 'cs-cars-list',
   templateUrl: './cars-list.component.html',
   styleUrls: ['./cars-list.component.less'],
   encapsulation: ViewEncapsulation.None,
