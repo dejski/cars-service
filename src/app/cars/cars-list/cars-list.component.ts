@@ -8,6 +8,7 @@ import {
   AfterViewInit,
 } from '@angular/core'
 import { Car } from '../models/car'
+import { Router } from '@angular/router'
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -25,7 +26,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
 
   cars: Car[]
 
-  constructor(private carsService: CarsService) {}
+  constructor(private carsService: CarsService, private router: Router) {}
 
   ngOnInit() {
     this.loadCars()
@@ -52,5 +53,9 @@ export class CarsListComponent implements OnInit, AfterViewInit {
 
   onShownGross(grossCost: number): void {
     this.grossCost = grossCost
+  }
+
+  goToCarDetails(car: Car) {
+    this.router.navigate(['/cars', car.id])
   }
 }
