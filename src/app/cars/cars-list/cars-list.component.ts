@@ -24,7 +24,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
   totalCost: number
   grossCost: number
   cars: Car[]
-  carForm = FormGroup
+  carForm: FormGroup
 
   constructor(
     private carsService: CarsService,
@@ -61,6 +61,12 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     this.carsService.getCars().subscribe(cars => {
       this.cars = cars
       this.countTotalCost()
+    })
+  }
+
+  addCar() {
+    this.carsService.addCar(this.carForm.value).subscribe(() => {
+      this.loadCars()
     })
   }
 

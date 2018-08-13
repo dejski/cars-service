@@ -22,14 +22,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let car of cars; let i = index">
-            <td [ngClass]="{'row-error': car.isFullyDamaged}" class="row-car" (click)="goToCarDetails(car)">{{car?.model}}</td>
-            <td>{{car?.plate}}</td>
-            <td>{{car?.deliveryDate}} date</td>
-            <td>{{car?.deadline}}</td>
-            <td>{{car?.clientFirstName}} {{car?.clientSurname}}</td>
-            <td>{{car?.cost}}</td>
-            <td>action placeholder</td>
+          <tr *ngFor="let car of cars; let i = index" (click)="goToCarDetails(car)" class="row-car">
+            <td csImportant [ngClass]="{'row-error': car.isFullyDamaged}"> {{ car?.model | uppercase }}</td>
+            <td> {{ car?.plate }}</td>
+            <td> {{ car?.deliveryDate | date:'shortDate' }}</td>
+            <td> {{ car?.deadline | date:'shortDate' }}</td>
+            <td> {{ car?.clientFirstName }} {{ car?.clientSurname | surnameShortcut }}</td>
+            <td csImportant> {{ car?.cost | currency:'PLN':true }}</td>
+            <td (click)="removeCar(car, $event)"> ( X ) </td>
           </tr>
         </tbody>
       </table>
@@ -59,8 +59,7 @@
   </div>
 </div>
 
-<p class="data-header">
-  Add a new car</p>
+<p class="data-header"> Add a new car</p>
 
 <div class="data-container">
   <form [formGroup]="carForm">

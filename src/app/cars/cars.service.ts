@@ -1,25 +1,33 @@
 import { Injectable } from '@angular/core'
-import { Http } from '@angular/http'
 import { Car } from './models/car'
 import { Observable } from 'rxjs/Observable'
+import { Http, RequestOptions, Headers } from '@angular/http'
+// import 'rxjs'
 import 'rxjs/add/operator/map'
-// import { Observable } from 'rxjs'
-// import { map } from 'rxjs/operators'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CarsService {
   private apiUrl = 'http://localhost:3000/api/cars'
+
   constructor(private http: Http) {}
 
   getCars(): Observable<Car[]> {
     return this.http.get(this.apiUrl).map(res => res.json())
-    // return this.http.get(this.apiUrl).pipe(map(res => res.json()))
   }
 
   getCar(id: number): Observable<Car> {
-    return this.http.get(this.apiUrl + '/' + id).map(res => res.json())
-    // return this.http.get(this.apiUrl).pipe(map(res => res.json()))
+    return this.http.get(this.apiUrl + `/${id}`).map(res => res.json())
+  }
+
+  addCar(data): Observable<Car> {
+    return this.http.post(this.apiUrl, data).map(res => res.json())
+  }
+
+  updateCar(id: number, data): Observable<Car> {
+    return this.http.put(this.apiUrl + `/${id}`, data).map(res => res.json())
+  }
+
+  removeCar(id: number): Observable<Car> {
+    return this.http.delete(this.apiUrl + `/${id}`).map(res => res.json())
   }
 }
