@@ -9,6 +9,7 @@ import {
 } from '@angular/core'
 import { Car } from '../models/car'
 import { Router } from '@angular/router'
+import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -20,16 +21,40 @@ import { Router } from '@angular/router'
 export class CarsListComponent implements OnInit, AfterViewInit {
   @ViewChild('totalCostRef')
   totalCostRef: TotalCostComponent
-
   totalCost: number
   grossCost: number
-
   cars: Car[]
+  carForm = FormGroup
 
-  constructor(private carsService: CarsService, private router: Router) {}
+  constructor(
+    private carsService: CarsService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.loadCars()
+    this.carForm = this.buildCarForm()
+  }
+
+  buildCarForm() {
+    return this.formBuilder.group({
+      model: ['', Validators.required],
+      type: '',
+      plate: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(7)],
+      ],
+      deliveryDate: '',
+      deadline: '',
+      color: '',
+      power: '',
+      clientFirstName: '',
+      clientSurname: '',
+      cost: '',
+      isFullyDamaged: '',
+      year: '',
+    })
   }
 
   loadCars(): void {
