@@ -89,4 +89,10 @@ export class CarsListComponent implements OnInit, AfterViewInit {
   goToCarDetails(car: Car) {
     this.router.navigate(['/cars', car.id])
   }
+  removeCar(car: Car, event) {
+    event.stopPropagation()
+    this.carsService.removeCar(car.id).subscribe(() => {
+      this.loadCars()
+    })
+  }
 }
