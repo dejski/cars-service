@@ -1,9 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'cs-total-cost',
   templateUrl: './total-cost.component.html',
   styleUrls: ['./total-cost.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush, // component nie będzie odświeżał przy systemie detekcji  -tylko przy inputach i outputach
 })
 export class TotalCostComponent {
   @Input()
